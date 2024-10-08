@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   botao: {
-    backgroundColor: 'GREEM',
+    backgroundColor: 'green',
     padding: 20,
     borderRadius: 10,
     marginTop: 20,

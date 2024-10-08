@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   botao_entrar: {
-    backgroundColor: '#GREEN',
+    backgroundColor: 'green',
   },
   botao_sair: {
-    backgroundColor: '#RED',
+    backgroundColor: 'red',
   },
   texto_botao: {
     color: 'white',

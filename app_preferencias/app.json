@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "app2",
-    "slug": "app2",
+    "name": "app_preferencias",
+    "slug": "app_preferencias",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

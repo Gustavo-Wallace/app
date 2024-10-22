@@ -1,37 +1,60 @@
 import React, { useState } from 'react';
-import { View, Text, Picker, Slider, Switch, Button, StyleSheet } from 'react-native';
+import { View, Text, Switch, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+import Slider from '@react-native-community/slider';
+import styles from './styles'; // Certifique-se de ter o arquivo de estilos
 
-const ConfiguracoesPreferencias = () => {
-  // Estados para as preferências
+const App = () => {
   const [tema, setTema] = useState('Claro');
   const [tamanhoFonte, setTamanhoFonte] = useState(16);
   const [modoNoturno, setModoNoturno] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  // Função para resetar as preferências
   const resetarPreferencias = () => {
     setTema('Claro');
     setTamanhoFonte(16);
     setModoNoturno(false);
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>Configurações de Preferências</Text>
+  const temaFundo = () => {
+    if (modoNoturno) return '#121212';
+    if (tema === 'Claro') return '#ffffff';
+    if (tema === 'Escuro') return '#333333';
+    return '#ffffff';
+  };
 
-      {/* Picker para seleção do tema */}
-      <Text style={styles.subtitulo}>Tema:</Text>
+  const temaCorTexto = () => {
+    return temaFundo() === '#ffffff' ? '#000000' : '#ffffff';
+  };
+
+  const items = [
+    { label: 'Claro', value: 'Claro' },
+    { label: 'Escuro', value: 'Escuro' },
+    { label: 'Automático', value: 'Automático' },
+  ];
+
+  return (
+    <View style={[styles.container, { backgroundColor: temaFundo() }]}>
+      <Text style={[styles.titulo, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
+        Configurações de Preferências
+      </Text>
+
+      <Text style={[styles.label, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>Tema:</Text>
       <Picker
         selectedValue={tema}
-        style={styles.picker}
+        style={[styles.picker, { color: temaCorTexto() }]} // Estilo do Picker
         onValueChange={(itemValue) => setTema(itemValue)}
+        itemStyle={{ color: temaCorTexto() }} // Estilo dos itens dentro do Picker
       >
         <Picker.Item label="Claro" value="Claro" />
         <Picker.Item label="Escuro" value="Escuro" />
         <Picker.Item label="Automático" value="Automático" />
       </Picker>
 
-      {/* Slider para ajuste do tamanho da fonte */}
-      <Text style={styles.subtitulo}>Tamanho da Fonte:</Text>
+      {/* Slider de tamanho da fonte */}
+      <Text style={[styles.label, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
+        Tamanho da Fonte: {tamanhoFonte}
+      </Text>
       <Slider
         style={styles.slider}
         minimumValue={12}
@@ -39,51 +62,30 @@ const ConfiguracoesPreferencias = () => {
         step={1}
         value={tamanhoFonte}
         onValueChange={(value) => setTamanhoFonte(value)}
+        minimumTrackTintColor={temaCorTexto()}
+        maximumTrackTintColor={temaCorTexto()}
+        thumbTintColor={temaCorTexto()}
       />
-      <Text style={[styles.textoSlider, { fontSize: tamanhoFonte }]}>
-        Tamanho atual: {tamanhoFonte}
-      </Text>
 
-      {/* Switch para Modo Noturno */}
-      <Text style={styles.subtitulo}>Modo Noturno:</Text>
+      {/* Switch do modo noturno */}
+      <Text style={[styles.label, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
+        Modo Noturno: {modoNoturno ? 'Ativado' : 'Desativado'}
+      </Text>
       <Switch
         value={modoNoturno}
-        onValueChange={() => setModoNoturno((previousState) => !previousState)}
+        onValueChange={(value) => setModoNoturno(value)}
+        trackColor={{ false: 'gray', true: 'green' }}
+        thumbColor={modoNoturno ? 'white' : 'white'}
       />
-      <Text>{modoNoturno ? 'Ativado' : 'Desativado'}</Text>
 
-      {/* Botão para resetar as preferências */}
-      <Button title="Resetar Preferências" onPress={resetarPreferencias} />
+      {/* Botão de resetar */}
+      <TouchableOpacity style={[styles.botao, { borderColor: temaCorTexto() }]} onPress={resetarPreferencias}>
+        <Text style={[styles.textoBotao, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
+          Resetar Preferências
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  titulo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  subtitulo: {
-    fontSize: 18,
-    marginVertical: 10,
-  },
-  picker: {
-    height: 50,
-    width: '100%',
-  },
-  slider: {
-    width: '100%',
-    height: 40,
-  },
-  textoSlider: {
-    marginTop: 10,
-  },
-});
-
-export default ConfiguracoesPreferencias;
+export default App;

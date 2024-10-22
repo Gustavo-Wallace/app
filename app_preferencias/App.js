@@ -17,20 +17,14 @@ const PreferenciasApp = () => {
 
   const temaFundo = () => {
     if (modoNoturno) return '#121212';
-    if (tema === 'Claro') return '#ffffff';
+    if (tema === 'Claro') return 'white';
     if (tema === 'Escuro') return '#333333';
-    return '#ffffff';
+    return 'white';
   };
 
   const temaCorTexto = () => {
-    return temaFundo() === '#ffffff' ? '#000000' : '#ffffff';
+    return temaFundo() === 'white' ? 'black' : 'white';
   };
-
-  const items = [
-    { label: 'Claro', value: 'Claro' },
-    { label: 'Escuro', value: 'Escuro' },
-    { label: 'Automático', value: 'Automático' },
-  ];
 
   return (
     <View style={[styles.container, { backgroundColor: temaFundo() }]}>
@@ -78,7 +72,7 @@ const PreferenciasApp = () => {
         thumbColor={modoNoturno ? 'white' : 'white'}
       />
 
-     
+
       <TouchableOpacity style={[styles.botao, { borderColor: temaCorTexto() }]} onPress={resetarPreferencias}>
         <Text style={[styles.textoBotao, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
           Resetar Preferências

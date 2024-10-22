@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, Switch, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
-import styles from './styles'; // Certifique-se de ter o arquivo de estilos
+import styles from './styles';
 
-const App = () => {
+const app_preferencias = () => {
   const [tema, setTema] = useState('Claro');
   const [tamanhoFonte, setTamanhoFonte] = useState(16);
   const [modoNoturno, setModoNoturno] = useState(false);
@@ -39,19 +39,20 @@ const App = () => {
         Configurações de Preferências
       </Text>
 
+
       <Text style={[styles.label, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>Tema:</Text>
       <Picker
         selectedValue={tema}
-        style={[styles.picker, { color: temaCorTexto() }]} // Estilo do Picker
+        style={[styles.picker, { color: temaCorTexto() }]}
         onValueChange={(itemValue) => setTema(itemValue)}
-        itemStyle={{ color: temaCorTexto() }} // Estilo dos itens dentro do Picker
+        itemStyle={{ color: temaCorTexto() }}
       >
         <Picker.Item label="Claro" value="Claro" />
         <Picker.Item label="Escuro" value="Escuro" />
         <Picker.Item label="Automático" value="Automático" />
       </Picker>
 
-      {/* Slider de tamanho da fonte */}
+
       <Text style={[styles.label, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
         Tamanho da Fonte: {tamanhoFonte}
       </Text>
@@ -67,7 +68,7 @@ const App = () => {
         thumbTintColor={temaCorTexto()}
       />
 
-      {/* Switch do modo noturno */}
+
       <Text style={[styles.label, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
         Modo Noturno: {modoNoturno ? 'Ativado' : 'Desativado'}
       </Text>
@@ -78,7 +79,7 @@ const App = () => {
         thumbColor={modoNoturno ? 'white' : 'white'}
       />
 
-      {/* Botão de resetar */}
+     
       <TouchableOpacity style={[styles.botao, { borderColor: temaCorTexto() }]} onPress={resetarPreferencias}>
         <Text style={[styles.textoBotao, { color: temaCorTexto(), fontSize: tamanhoFonte }]}>
           Resetar Preferências
@@ -88,4 +89,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default app_preferencias;

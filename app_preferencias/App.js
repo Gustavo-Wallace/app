@@ -4,11 +4,10 @@ import { Picker } from '@react-native-picker/picker';
 import Slider from '@react-native-community/slider';
 import styles from './styles';
 
-const app_preferencias = () => {
+const PreferenciasApp = () => {
   const [tema, setTema] = useState('Claro');
   const [tamanhoFonte, setTamanhoFonte] = useState(16);
   const [modoNoturno, setModoNoturno] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const resetarPreferencias = () => {
     setTema('Claro');
@@ -89,4 +88,4 @@ const app_preferencias = () => {
   );
 };
 
-export default app_preferencias;
+export default PreferenciasApp;

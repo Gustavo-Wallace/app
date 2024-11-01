@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import frases from './frases';
 import styles from './styles';
 
-const FortuneCookieApp = () => {
+const BiscoitoApp = () => {
   const [biscoito_quebrado, set_biscoito_quebrado] = useState(false);
   const [frase_sorte, set_frase_sorte] = useState('');
 
@@ -60,4 +60,4 @@ const FortuneCookieApp = () => {
   );
 };
 
-export default FortuneCookieApp;
+export default BiscoitoAppApp;
